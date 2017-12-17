@@ -33,21 +33,26 @@ def get_attr_of_pset(_id):
 	dict_psets = {}
 	
 	try:
-		defined_by=[x.RelatingPropertyDefinition for x in ifc_file[_id].IsDefinedBy if x.is_a("IfcRelDefinesByProperties")]
-		
+		defined_by_type=[x.RelatingType for x in ifc_file[_id].IsDefinedBy if x.is_a("IfcRelDefinesByType")]
+		defined_by_properties=[x.RelatingPropertyDefinition for x in ifc_file[_id].IsDefinedBy if x.is_a("IfcRelDefinesByProperties")]
 	except:
 		dict_psets.update({ifc_file[_id].GlobalId: "No Attributes found"})
 	else:
-		for x in defined_by:
+		for x in defined_by_type:
+			if x.HasPropertySets:
+				for y in x.HasPropertySets:
+					for z in y.HasProperties:
+						dict_psets.update({z.Name: z.NominalValue.wrappedValue})
+					
+		for x in defined_by_properties:
 			if x.is_a("IfcPropertySet"):
 				for y in x.HasProperties:
 					if y.is_a("IfcPropertySingleValue"):
 						dict_psets.update({y.Name: y.NominalValue.wrappedValue})
-						
+					#this could be usefull for multilayered walls in Allplan	
 					if y.is_a("IfcComplexProperty"):
 						for z in y.HasProperties:
-							dict_psets.update({z.Name: z.NominalValue.wrappedValue})
-							
+							dict_psets.update({z.Name: z.NominalValue.wrappedValue})					
 			if x.is_a("IfcElementQuantity"):
 				for y in x.Quantities:
 					dict_psets.update({y[0]: y[3]})
