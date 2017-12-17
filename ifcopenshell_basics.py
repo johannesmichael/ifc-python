@@ -1,4 +1,4 @@
-#Collection of basich methods to get ifc information
+#Collection of basic methods to get ifc information
 #Test for inverse attributes and related Spaces/elements
 
 import ifcopenshell as ifc
@@ -60,7 +60,7 @@ for rel in space_bound:
 	rel_space_element = rel.RelatedBuildingElement
 	print(rel_space_element)
 
-#Function, to get all attributes of property sets and base quantities
+#Function, to get all attributes of property sets (IfcRelDefinedByProperties) and base quantities
 def get_attr_of_pset(_id):
 	""" Get all attributes of an instance by given Id
 		param _id: id of instance
