@@ -1,11 +1,14 @@
 ###############################################################################
-# This file contains functions to retrieve ifc property set information
+# This file contains functions to retrieve ifc property set information.        #
+# It was developed to help analyze ifc property data with pandas and            #   
+# excel. See IfcAnalyze.py for example
+# 
 # 
 # It uses the IfcOpenshell-python package 
 # https://github.com/IfcOpenShell/IfcOpenShell/tree/master/src/ifcopenshell-python/ifcopenshell
-# Thanks to the IfcOpenshell-team!!!                                                                           #
-#                                                                             #
-# This module and its functions is distributed in the hope that               #
+# Thanks to the IfcOpenshell-team!!!                                            #
+#                                                                               #
+# This module and its functions is distributed in the hope that                 #
 # it will be useful, when working with ifc data.	
 # 
 # For help with ifc data, take a look at 
@@ -13,10 +16,20 @@
 ###############################################################################
 
 """
-	Module with function to retrieve pset information of an IFC file with
+	Module with functions to retrieve pset information of an IFC file with
 	the IfcOpenshell Package
 	Dependencies: IfcOpenshell-python
-
+    Functions:
+    - get_related_type_definition(ifc_instance)
+    - get_related_property_sets(ifc_instance)
+    - get_related_quantities(ifc_instance)
+    - get_property_single_value(x)
+    - get_type_single_value(x)
+    - get_quantity_single_value(x)
+    - get_all_type_data(ifc_instance)
+    - get_all_pset_data(ifc_instance)
+    - get_all_quantity_data(ifc_instance)
+    - get_all_instance_data(ifc_instance)
 
 	Covers:
 	instance Information
@@ -53,10 +66,13 @@ def get_related_property_sets(ifc_instance):
     Returns a list of IfcPropertySets for given ifc_instance
     argument: ifc_instance
     return: list of property sets
+
     """
 
     #TODO: Error handling and list comprehension
-	properties_list = []
+
+    properties_list = []
+
     for x in ifc_instance.IsDefinedBy:
         if x.is_a("IfcRelDefinesByProperties"):
             if x.RelatingPropertyDefinition.is_a("IfcPropertySet"):
