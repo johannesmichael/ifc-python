@@ -1,22 +1,32 @@
+###############################################################################
+# This file contains functions to retrieve ifc property set information
+# 
+# It uses the IfcOpenshell-python package 
+# https://github.com/IfcOpenShell/IfcOpenShell/tree/master/src/ifcopenshell-python/ifcopenshell
+# Thanks to the IfcOpenshell-team!!!                                                                           #
+#                                                                             #
+# This module and its functions is distributed in the hope that               #
+# it will be useful, when working with ifc data.	
+# 
+# For help with ifc data, take a look at 
+# http://www.buildingsmart-tech.org/ifc/IFC2x3/TC1/html/index.htm												  #
+###############################################################################
+
 """
-Module with function to retrieve pset information of an IFC file with
-the IfcOpenshell Package
+	Module with function to retrieve pset information of an IFC file with
+	the IfcOpenshell Package
+	Dependencies: IfcOpenshell-python
 
-https://github.com/IfcOpenShell/IfcOpenShell/tree/master/src/ifcopenshell-python/ifcopenshell
 
+	Covers:
+	instance Information
+	Standard and userdefined psets
+	BaseQuantitites
+	IfcSingleValues
 
-Covers:
-instance Information
-Standard and userdefined psets
-BaseQuantitites
-IfcSingleValues
+	Type Information not working well yet
 
-Type Information not wroking well yet
-
-More information on
-http://www.buildingsmart-tech.org/ifc/IFC2x3/TC1/html/index.htm
 """
-
 
 #TODO: IfcPropertyEnumeratedValue, IfcPropertyBoundedValue, IfcPropertyTableValue, IfcPropertyReferenceValue, IfcPropertyListValue
 
@@ -25,6 +35,7 @@ def get_related_properties(ifc_instance):
                                 for x in ifc_instance.IsDefinedBy \
                                 if x.is_a("IfcRelDefinesByProperties")]
     return defined_by_properties_list
+
 
 def get_related_type_definition(ifc_instance):
     """
@@ -36,18 +47,24 @@ def get_related_type_definition(ifc_instance):
                           if x.is_a("IfcRelDefinesByType")]
     return defined_by_type_list
 
+
 def get_related_property_sets(ifc_instance):
     """
     Returns a list of IfcPropertySets for given ifc_instance
     argument: ifc_instance
     return: list of property sets
     """
-    properties_list = []
+
+    #TODO: Error handling and list comprehension
+	properties_list = []
     for x in ifc_instance.IsDefinedBy:
         if x.is_a("IfcRelDefinesByProperties"):
             if x.RelatingPropertyDefinition.is_a("IfcPropertySet"):
                 properties_list.append(x.RelatingPropertyDefinition)
     return properties_list                
+
+
+
 
 def get_related_quantities(ifc_instance):
     """
@@ -61,6 +78,8 @@ def get_related_quantities(ifc_instance):
             if x.RelatingPropertyDefinition.is_a("IfcElementQuantity"):
                 quantities_list.append(x.RelatingPropertyDefinition)
     return quantities_list     
+
+
 
 def get_property_single_value(x):
     """
@@ -83,6 +102,8 @@ def get_property_single_value(x):
     return attributes_dicts     
         
 
+
+
 def get_type_single_value(x):
     """
     Returns a dict of dicts of IfcXXTYpe single values (like "IfcWallType").  
@@ -103,6 +124,9 @@ def get_type_single_value(x):
 	#Returning a dictionary of dictionaries is used, because it is easy to transform to pandas.DataFrame 
 	#Have to look into that, performance wise
     return type_attr_dicts
+
+
+
 
 def get_quantity_single_value(x):
     """
