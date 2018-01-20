@@ -4,8 +4,9 @@ They were developed as helpers for daily work.
 
 For example:
 - extracting all information (psets) from an ifc-file and write them to excel
-- space boundaries
-- visualization of ifc-data
+- space boundaries (coming soon)
+- visualization of ifc-data (under development)
+- manipulating ifc
 
 The initial scripts were done quick and dirty. This is the place were they should be evolve to productive scripts.
 Any help and comments appreciated!!!
