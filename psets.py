@@ -101,18 +101,18 @@ def get_property_single_value(x):
     """
     Returns a dict of dicts of IfcSingleValues, even from IfcComplexProperties. 
     argument: IFC Element as contained in list from get_related_property_sets()
-    return: dict of property single values like {"IfcName":"xx", "IfcGlobalId": "klkhlkh", ......}
+    return: dict of property single values like {"(Pset, PropertyName)":"xx", "IfcGlobalId": "klkhlkh", ......}
 
     """
     attributes_dicts={}
    
     for y in x.HasProperties:
         if y.is_a("IfcPropertySingleValue") and y.NominalValue is not None:
-            attributes_dicts.update({x.Name +"_"+ y.Name:y.NominalValue.wrappedValue})
+            attributes_dicts.update({(x.Name,y.Name):y.NominalValue.wrappedValue})
         if y.is_a("IfcComplexProperty"):
             for z in y.HasProperties:
                 if z.NominalValue is not None:
-                    attributes_dicts.update({x.Name +"_"+ z.Name: z.NominalValue.wrappedValue})
+                    attributes_dicts.update({(x.Name,z.Name): z.NominalValue.wrappedValue})
 	#Returning a dictionary of dictionaries is used, because it is easy to transform to pandas.DataFrame 
 	#Have to look into that, performance wise
     return attributes_dicts     
@@ -124,7 +124,7 @@ def get_type_single_value(x):
     """
     Returns a dict of dicts of IfcXXTYpe single values (like "IfcWallType").  
     argument: IFC Element as contained in list from get_related_property_sets()
-    return: dict of property single values like {"IfcName":"xx", "IfcGlobalId": "klkhlkh", ......}
+    return: dict of property single values like {"(Pset, PropertyName)":"xx", "IfcGlobalId": "klkhlkh", ......}
 
     """
     type_attr_dicts={}
@@ -148,21 +148,21 @@ def get_quantity_single_value(x):
     """
     Returns a dict of dicts of IfcElementQuantity single values.
     argument: IFC Element as contained in list from get_related_property_sets()
-    return: dict of property single values like {"IfcName":"xx", "IfcGlobalId": "klkhlkh", ......}
+    return: dict of property single values like {"(Pset, PropertyName)":"xx", "IfcGlobalId": "klkhlkh", ......}
 
     """
     quantities_dicts = {}
     for y in x.Quantities:
         if y.is_a('IfcQuantityArea'):
-            quantities_dicts.update({x.Name +"_"+ y.Name:y.AreaValue})
+            quantities_dicts.update({(x.Name,y.Name):y.AreaValue})
         if y.is_a('IfcQuantityLength'):
-            quantities_dicts.update({x.Name +"_"+ y.Name:y.LengthValue})
+            quantities_dicts.update({(x.Name,y.Name):y.LengthValue})
         if y.is_a('IfcQuantityVolume'):
-            quantities_dicts.update({x.Name +"_"+ y.Name:y.VolumeValue})
+            quantities_dicts.update({(x.Name,y.Name):y.VolumeValue})
         if y.is_a('IfcQuantityCount'):
-            quantities_dicts.update({x.Name +"_"+ y.Name:y.CountValue})
+            quantities_dicts.update({(x.Name,y.Name):y.CountValue})
         if y.is_a('IfcQuantityWeight'):
-            quantities_dicts.update({x.Name +"_"+ y.Name:y.WeightValue})
+            quantities_dicts.update({(x.Name,y.Name):y.WeightValue})
         
     return quantities_dicts 
 
