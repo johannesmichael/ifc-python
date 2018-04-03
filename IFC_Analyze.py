@@ -1,3 +1,39 @@
+###############################################################################
+# 03. March 2018, Johannes Römpp --GitHub: johannesmichael/ifc-python
+# https://github.com/johannesmichael/ifc-python
+#                                                                               #
+# This file depends on psets.py                                                 #
+# It was developed to help analyze ifc property data with pandas and            #
+# excel.                                                                        #
+#                                                                               #
+#                                                                               #
+# It uses the IfcOpenshell-python package                                       #
+# https://github.com/IfcOpenShell/IfcOpenShell/tree/master/src/ifcopenshell-python/ifcopenshell
+# Thanks to the IfcOpenshell-team!!!                                            #
+#                                                                               #
+# This script and its functions is distributed in the hope that                 #
+# it will be useful, when working with ifc data.	                            #
+#                                                                               #
+# For help with ifc data, take a look at                                        #
+# http://www.buildingsmart-tech.org/ifc/IFC2x3/TC1/html/index.htm				#
+###############################################################################
+
+
+
+
+
+
+
+"""
+Thanks to ifcopenshell-python https://github.com/IfcOpenShell/IfcOpenShell/tree/master/src/ifcopenshell-python/ifcopenshell
+
+This script is used to extract all pset-information of an ifc-file and save it to an excel-workbook.
+In the analyze part one can define attributes the pivo-table is grouped by
+"""
+
+
+
+
 import ifcopenshell as ifc
 import psets
 from tkinter.filedialog import askopenfilename
