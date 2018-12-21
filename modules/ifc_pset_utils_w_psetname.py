@@ -1,11 +1,27 @@
 #Attributes with Pset-Name, like {"BaseQUantities,Lenght":2.03}
 
+
+###############################################################################
+# This file contains functions to retrieve ifc property set information.        #
+# It was developed to help analyze ifc property data with pandas and            #   
+# excel. See IfcAnalyze.py for example
+# 
+# 
+# It uses the IfcOpenshell-python package 
+# https://github.com/IfcOpenShell/IfcOpenShell/tree/master/src/ifcopenshell-python/ifcopenshell
+# Thanks to the IfcOpenshell-team!!!                                            #
+#                                                                               #
+# This module and its functions is distributed in the hope that                 #
+# it will be useful, when working with ifc data.	
+# 
+# For help with ifc data, take a look at 
+# http://www.buildingsmart-tech.org/ifc/IFC2x3/TC1/html/index.htm												  #
+###############################################################################
+
+
 """
 Module with function to retrieve pset information of an IFC file with
 the IfcOpenshell Package
-
-https://github.com/IfcOpenShell/IfcOpenShell/tree/master/src/ifcopenshell-python/ifcopenshell
-
 
 Covers:
 instance Information
@@ -15,8 +31,7 @@ IfcSingleValues
 
 Type Information not working well yet
 
-More information on
-http://www.buildingsmart-tech.org/ifc/IFC2x3/TC1/html/index.htm
+
 """
 
 
