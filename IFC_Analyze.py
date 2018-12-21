@@ -82,7 +82,7 @@ def extract_instances(instances, source_file):
 
 
 #----------Read Ifc-File----------
-#ifc_file_path1="B:\DEV_Temp\BF1_HLKK_HA.ifc"
+#ifc_file_path1="B:\DEV_Temp\HA.ifc"
 ifc_file_path = OpenFile(".ifc", ("IFC-Files","*.ifc"))
 ifc_file= ifc.open(ifc_file_path)
 
@@ -90,7 +90,7 @@ source_file = os.path.split(ifc_file_path)[1]
 #extract data from Ifc-File
 
 #------IfcElement-------------------
-instances = ifc_file.by_type("IfcElement")
+instances = ifc_file.by_type("IfcElement") #better be more precise, like IfcBuildingElement, IfcDistributionElement...
 
 print(len(instances))
 
